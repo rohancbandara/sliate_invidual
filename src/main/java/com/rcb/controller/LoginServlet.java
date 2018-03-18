@@ -56,7 +56,7 @@ public class LoginServlet extends HttpServlet {
 		} else {
 			request.setAttribute("massage", "Invalide username/password!!!");
 			request.getRequestDispatcher("index.jsp").forward(request, response);
-			;
+
 			// response.sendRedirect("");
 
 		}

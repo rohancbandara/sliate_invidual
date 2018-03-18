@@ -19,7 +19,7 @@
 
 
 
-	<form action="AddDocter.jsp" method="get">
+	<form action="DocterAdd.jsp" method="get">
 		<label>Patient:</label>
 		<input type="text" name="patient" id="patient">
 		<input type="submit" name="btnSearch" id="btnAddNewPatient" value="Add New Docter" >
@@ -28,7 +28,7 @@
 		
 		<!-- Docter Lists... -->
 		<table border="1">
-				<th scope="col">DID</th><th scope="col">Docter Name</th><th scope="col">Date of Birth</th><th scope="col">Email</th><th scope="col">Special</th><th scope="col">Created Date</th><th colspan="2" scope="col">Action</th>
+				<th scope="col">DID</th><th scope="col">Docter Name</th><th scope="col">Date of Birth</th><th scope="col">Email</th><th scope="col">Special</th><th scope="col">Created Date</th><th scope="col">Edited Date</th><th colspan="2" scope="col">Action</th>
 				
 		<%
 		
@@ -48,8 +48,9 @@
 		<td><%=doctersList.get(i).getD_email() %></td>
 		<td><%=doctersList.get(i).getD_specileName() %></td>
 		<td><%=doctersList.get(i).getCreate_date() %></td>
-		<td><a href="/Medicle_Record_System/docterEdit?id=<%=doctersList.get(i).getD_id() %>">Edit</a></td>
-		<td><a href="/Medicle_Record_System/docterDelete?id=<%=doctersList.get(i).getD_id() %>">Delete</a></td>
+		<td><%=doctersList.get(i).getEdit_date() %></td>
+		<td><a href="/RCB_Medicle_Center/setDid?id=<%=doctersList.get(i).getD_id() %>">Edit</a></td>
+		<td><a href="/RCB_Medicle_Center/docterDelete?id=<%=doctersList.get(i).getD_id() %>">Delete</a></td>
 		
 	
 	</tr><% }%>

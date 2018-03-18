@@ -65,7 +65,7 @@ public class DocterService {
 		ArrayList<Docter> docters = new ArrayList<Docter>();
 
 		try {
-			String sql = "SELECT tbl_docters.d_id, tbl_docters.d_fname, tbl_docters.d_lname, tbl_docters.d_dob, tbl_docters.d_email, tbl_docters.d_special, tbl_docters.create_date, tbl_special.sp_name FROM tbl_docters Inner Join tbl_special ON tbl_special.sp_id = tbl_docters.d_special ";
+			String sql = "SELECT tbl_docters.d_id, tbl_docters.d_fname, tbl_docters.d_lname, tbl_docters.d_dob, tbl_docters.d_email, tbl_docters.d_special, tbl_docters.create_date,tbl_docters.edit_date, tbl_special.sp_name FROM tbl_docters Inner Join tbl_special ON tbl_special.sp_id = tbl_docters.d_special ";
 
 			ResultSet rs = db.getData(sql);
 			while (rs.next()) {
@@ -78,6 +78,7 @@ public class DocterService {
 				docter.setD_email(rs.getString("tbl_docters.d_email"));
 				docter.setD_special(rs.getInt("tbl_docters.d_special"));
 				docter.setCreate_date(rs.getString("tbl_docters.create_date"));
+				docter.setEdit_date(rs.getString("tbl_docters.edit_date"));
 				docter.setD_specileName(rs.getString("tbl_special.sp_name"));
 				docters.add(docter);
 
@@ -91,15 +92,15 @@ public class DocterService {
 		return (docters);
 	}
 
-	public static void main(String args[]) {
-		DocterService dc = new DocterService();
-		ArrayList<Docter> doctersList = dc.getAllDocters();
-		String s[] = null;
-		for (int i = 0; i < doctersList.size(); i++) {
-
-			System.out.println(doctersList.get(i).getD_id());
-			System.out.println(doctersList.get(i).getD_FName());
-		}
-
-	}
+	// public static void main(String args[]) {
+	// DocterService dc = new DocterService();
+	// ArrayList<Docter> doctersList = dc.getAllDocters();
+	// String s[] = null;
+	// for (int i = 0; i < doctersList.size(); i++) {
+	//
+	// System.out.println(doctersList.get(i).getD_id());
+	// System.out.println(doctersList.get(i).getD_FName());
+	// }
+	//
+	// }
 }

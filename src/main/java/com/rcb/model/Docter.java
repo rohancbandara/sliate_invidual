@@ -9,7 +9,16 @@ public class Docter {
 	private int d_special;
 	private String d_specileName;
 	private String create_date;
+	private String edit_date;
 	private int is_delete;
+
+	public String getEdit_date() {
+		return edit_date;
+	}
+
+	public void setEdit_date(String edit_date) {
+		this.edit_date = edit_date;
+	}
 
 	public String getD_specileName() {
 		return d_specileName;

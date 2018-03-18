@@ -20,7 +20,7 @@ if(session.getAttribute("username")==null){
 %>
 <h3>Welcome :${username }        <a href="login">logout</a></h3>
 
-<form action="registerDocter" method="get">
+<form action="addDocter" method="get">
 
 
 <h3>Basic Info</h3>
@@ -56,7 +56,7 @@ if(session.getAttribute("username")==null){
 			</select><br>
          
          <button type="submit" name="btnSubmit" id="btnSubmit" value="save">Register</button>
-		 <button type="submit" name="btnSubmit" id="btnSubmit" value="cancel">Cancel</button>
+		 <button type="submit" name="btnSubmit" id="btnSubmit" value="back">Back</button>
 
 
 </form>
