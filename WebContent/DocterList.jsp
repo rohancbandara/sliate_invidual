@@ -49,7 +49,7 @@
 		<td><%=doctersList.get(i).getD_specileName() %></td>
 		<td><%=doctersList.get(i).getCreate_date() %></td>
 		<td><%=doctersList.get(i).getEdit_date() %></td>
-		<td><a href="/RCB_Medicle_Center/setDid?id=<%=doctersList.get(i).getD_id() %>">Edit</a></td>
+		<td><a href="/RCB_Medicle_Center/getDid?id=<%=doctersList.get(i).getD_id() %>">Edit</a></td>
 		<td><a href="/RCB_Medicle_Center/docterDelete?id=<%=doctersList.get(i).getD_id() %>">Delete</a></td>
 		
 	

@@ -35,9 +35,8 @@ if(session.getAttribute("username")==null){
 	<li><a href="#"><span>Appointment</span></a></li>
 		<ul class="drpAppointment">
 			
-			<li><a href="CreateAppointment.jsp">Create Appointment Shedule</a></li>
-			<li><a href="AddDocterAppointment.jsp">Add Docter Appointment</a></li>
-			<li><a href="DocterAppointmentList.jsp">Appointments Shedule</a></li>
+			<li><a href="AppointmentCreate.jsp">Create Appointment Shedule</a></li>
+			<li><a href="AppointmentList.jsp">Appointments Shedule</a></li>
 			
 		</ul>	
 	<li><a href="#"><span>Docter</span></a></li>

@@ -15,7 +15,7 @@ import com.rcb.model.Docter;
  * Servlet implementation class SetPID
  */
 @WebServlet("/setDid")
-public class SetDidServlet extends HttpServlet {
+public class GetPidAppionmentServlet extends HttpServlet {
 	private static final long serialVersionUID = 1L;
 
 	protected void doGet(HttpServletRequest request, HttpServletResponse response)
