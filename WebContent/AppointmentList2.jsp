@@ -1,4 +1,5 @@
 <?xml version="1.0" encoding="ISO-8859-1" ?>
+<%@page import="com.rcb.model.Table"%>
 <%@page import="com.rcb.model.Appinment"%>
 <%@page import="java.util.ArrayList"%>
 <%@page import="com.rcb.service.CreateTimeIntervelService"%>
@@ -29,6 +30,28 @@ if(session.getAttribute("username")==null){
 <h3>Welcome :${username }        <a href="login">logout</a></h3>
 </br></br>
 <h4>Appoinment Details TEst</h4>
+
+
+		<%
+		
+		CreateTimeIntervelService cT=new CreateTimeIntervelService();
+		
+		ArrayList<Table> tableList = cT.getAllTable();
+
+		for (int i = 0; i < tableList.size(); i++) {
+			
+		%>
+	
+		
+		<p><b>Dr.<%=tableList.get(i).getD_fname().toUpperCase()%> <%=tableList.get(i).getD_lname().toUpperCase() %></b> Special in :<%=tableList.get(i).getSp_name() %></p>
+			<p>Comming on : <b><%=tableList.get(i).getDate()%></b> From <b><%=tableList.get(i).getFrom() %>:00 HH</b> To <b><%=tableList.get(i).getTo()%>:00 HH</b></p>
+			
+	
+
+		
+		<% }%>
+
+
 
 
 

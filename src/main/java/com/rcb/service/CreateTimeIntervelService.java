@@ -7,6 +7,7 @@ import org.apache.log4j.Logger;
 
 import com.rcb.dbconnection.DbConnection;
 import com.rcb.model.Appinment;
+import com.rcb.model.Table;
 import com.rcb.model.TimeIntervel;
 
 public class CreateTimeIntervelService {
@@ -92,16 +93,50 @@ public class CreateTimeIntervelService {
 		return (appinments);
 	}
 
-	// public static void main(String args[]) {
-	// CreateTimeIntervelService cc = new CreateTimeIntervelService();
-	// ArrayList<Appinment> appoimentList = cc.getAllAppoinment();
-	//
-	// for (int i = 0; i < appoimentList.size(); i++) {
-	//
-	// System.out.println(appoimentList.get(i).getId());
-	// System.out.println(appoimentList.get(i).getIntavel());
-	// }
-	//
-	// }
+	public ArrayList<Table> getAllTable() {
+		ArrayList<Table> tables = new ArrayList<Table>();
+		DbConnection db = new DbConnection();
+		try {
+			String sql = "SELECT tbl_tables.tbl_id, tbl_tables.d_id, tbl_tables.date, tbl_tables.from, tbl_tables.to, tbl_docters.d_fname, tbl_docters.d_lname, tbl_docters.d_special, tbl_special.sp_name FROM tbl_tables Inner Join tbl_docters ON tbl_docters.d_id = tbl_tables.d_id Inner Join tbl_special ON tbl_special.sp_id = tbl_docters.d_special  ";
+			ResultSet rs = db.getData(sql);
+			while (rs.next()) {
+
+				Table table = new Table();
+
+				table.setTbl_id(rs.getString("tbl_tables.tbl_id"));
+				table.setD_id(rs.getInt("tbl_tables.d_id"));
+				table.setDate(rs.getString("tbl_tables.date"));
+				table.setFrom(rs.getInt("tbl_tables.from") / 60);
+				table.setTo(rs.getInt("tbl_tables.to") / 60);
+				table.setD_fname(rs.getString("tbl_docters.d_fname"));
+				table.setD_lname(rs.getString("tbl_docters.d_lname"));
+				table.setD_special(rs.getInt("tbl_docters.d_special"));
+				table.setSp_name(rs.getString("tbl_special.sp_name"));
+
+				tables.add(table);
+
+				LOG.info("Sucessfully Loaded  Tables " + table.getTbl_id() + " ! ");
+
+			}
+			LOG.info("Sucessfully Completed Load All Tables ! ");
+
+		} catch (Exception e) {
+			LOG.warn("Exception in  getAllTable()  -> CreateTimeIntervelService :" + e);
+		}
+
+		return (tables);
+	}
+
+	public static void main(String args[]) {
+		CreateTimeIntervelService cc = new CreateTimeIntervelService();
+		ArrayList<Table> appoimentList = cc.getAllTable();
+
+		for (int i = 0; i < appoimentList.size(); i++) {
+
+			System.out.println(appoimentList.get(i).getD_fname());
+			System.out.println(appoimentList.get(i).getD_id());
+		}
+
+	}
 
 }
