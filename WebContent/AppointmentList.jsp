@@ -1,4 +1,7 @@
 <?xml version="1.0" encoding="ISO-8859-1" ?>
+<%@page import="com.rcb.model.Appinment"%>
+<%@page import="java.util.ArrayList"%>
+<%@page import="com.rcb.service.CreateTimeIntervelService"%>
 <%@page import="java.sql.ResultSet"%>
 <%@page import="javax.naming.spi.DirStateFactory.Result"%>
 <%@page import="com.rcb.dbconnection.DbConnection"%>
@@ -56,6 +59,8 @@ if(session.getAttribute("username")==null){
 			try{
 				//String sql2="SELECT tbl_appoinment.id,tbl_tables.tbl_id, tbl_appoinment.intervels, tbl_appoinment.patient, tbl_appoinment.dsp FROM tbl_appoinment Inner Join tbl_tables ON tbl_tables.tbl_id = tbl_appoinment.tbl_id where tbl_tables.date='"+date+"' ";
 				String sql2="SELECT tbl_appoinment.id, tbl_tables.tbl_id, tbl_appoinment.intervels, tbl_appoinment.patient, tbl_appoinment.dsp, tbl_tables.`date`, tbl_tables.`from`, tbl_tables.`to` FROM tbl_appoinment Inner Join tbl_tables ON tbl_tables.tbl_id = tbl_appoinment.tbl_id where tbl_tables.date='"+date+"' ";
+				//String sql2="SELECT tbl_appoinment.id, tbl_tables.tbl_id, tbl_appoinment.intervels, tbl_appoinment.patient, tbl_appoinment.dsp, tbl_tables.`date`, tbl_tables.`from`, tbl_tables.`to`, tbl_patient.p_fname, tbl_patient.p_lname FROM tbl_appoinment Inner Join tbl_tables ON tbl_tables.tbl_id = tbl_appoinment.tbl_id Inner Join tbl_patient ON tbl_patient.p_id = tbl_appoinment.patient where tbl_tables.date='"+date+"'  ";
+				
 				ResultSet rs2=db.getData(sql2);
 				while(rs2.next()){
 					int id=rs2.getInt("tbl_appoinment.id");
@@ -64,10 +69,20 @@ if(session.getAttribute("username")==null){
 					int patient=rs2.getInt("tbl_appoinment.patient");
 					
 					String dsp=rs2.getString("tbl_appoinment.dsp");
+					String sql3="SELECT tbl_patient.p_fname, tbl_patient.p_lname, tbl_appoinment.patient, tbl_patient.p_id FROM tbl_patient Inner Join tbl_appoinment ON tbl_patient.p_id = tbl_appoinment.patient where tbl_patient.p_id='"+patient+"' ";
+					String pFname,pLname,fullName=null;
+					ResultSet rs3=db.getData(sql3);
+					while(rs3.next()){
+						
+						pFname=rs3.getString("tbl_patient.p_fname");
+						pLname=rs3.getString("tbl_patient.p_fname");
+						fullName=pFname+" "+pLname;
+						
+					}
 					%>
 					<tr>
 						<td><%=interval %></td>
-						<td><a href="/RCB_Medicle_Center/setDid?id=<%=id %>"><%=patient %></a></td>
+						<td><a href="/RCB_Medicle_Center/getPid?id=<%=id %>"><%=fullName %></a></td>
 						<td><%=dsp %></a></td>
 					</tr>
 					<%
@@ -90,6 +105,9 @@ if(session.getAttribute("username")==null){
 		e.printStackTrace();}
 
 %>
+
+
+
 
 
 </body>

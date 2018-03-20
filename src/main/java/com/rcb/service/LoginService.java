@@ -2,10 +2,13 @@ package com.rcb.service;
 
 import java.sql.ResultSet;
 
+import org.apache.log4j.Logger;
+
 import com.rcb.dbconnection.DbConnection;
 import com.rcb.model.User;
 
 public class LoginService {
+	private static final Logger LOG = Logger.getLogger(LoginService.class);
 	static DbConnection db = new DbConnection();
 
 	public static boolean authenticate(User user) {
@@ -23,12 +26,12 @@ public class LoginService {
 				user_name_db = rs.getString("user_name");
 				user_password_db = rs.getString("user_password");
 				if (user_name_db.equals(user.getUser_name()) && user_password_db.equals(user.getUser_password())) {
-					System.out.println("true");
+					LOG.info("Sucessfully Login true Authenticate");
 					return true;
 				}
 			}
 		} catch (Exception e) {
-			e.printStackTrace();
+			LOG.warn("Exception in authenticate(User user)  -> LoginService :", e);
 		}
 		System.out.println("false");
 		return false;
@@ -49,9 +52,7 @@ public class LoginService {
 			}
 
 		} catch (Exception e) {
-			e.printStackTrace();
-			System.out.println("erro in gettype...");
-
+			LOG.warn("Exception in getUserType(User user)  -> LoginService :", e);
 		}
 
 		return user_type_db;

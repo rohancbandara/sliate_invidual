@@ -3,11 +3,14 @@ package com.rcb.service;
 import java.sql.ResultSet;
 import java.util.ArrayList;
 
+import org.apache.log4j.Logger;
+
 import com.rcb.dbconnection.DbConnection;
 import com.rcb.model.Docter;
 import com.rcb.model.Special;
 
 public class DocterService {
+	private static final Logger LOG = Logger.getLogger(DocterService.class);
 	DbConnection db = new DbConnection();
 
 	// insert Docter details
@@ -22,11 +25,11 @@ public class DocterService {
 			db.putData(insertDocterSQL);
 
 			System.out.println("sucessfully docter Added!!!");
+			LOG.info("Sucessfully Added Docter ! ");
 			return true;
 
 		} catch (Exception e) {
-			e.printStackTrace();
-			System.out.println("error docter Added!!!");
+			LOG.warn("Exception in  putDocterData(Docter docter)  -> DocterService :", e);
 		}
 		return false;
 	}
@@ -40,9 +43,10 @@ public class DocterService {
 				sp_idDb = rs.getInt("sp_id");
 
 			}
+			LOG.info("Sucessfully Loaded  Docter " + special + " ! ");
 
 		} catch (Exception e) {
-			e.printStackTrace();
+			LOG.warn("Exception in getSpecialId(Special special)  -> DocterService :", e);
 		}
 		return sp_idDb;
 
@@ -52,11 +56,11 @@ public class DocterService {
 		try {
 			String deleteDocterSql = "DELETE FROM tbl_docters WHERE d_id='" + did + "'";
 			db.putData(deleteDocterSql);
-			System.out.println("sucessfully delete docter");
+			LOG.info("Sucessfully Delete  Docter " + did + " ! ");
 			return true;
+
 		} catch (Exception e) {
-			System.out.println("error delete docter");
-			e.printStackTrace();
+			LOG.warn("Exception in deleteDocter(int did)  -> DocterService :", e);
 		}
 		return false;
 	}
@@ -81,12 +85,13 @@ public class DocterService {
 				docter.setEdit_date(rs.getString("tbl_docters.edit_date"));
 				docter.setD_specileName(rs.getString("tbl_special.sp_name"));
 				docters.add(docter);
-
+				LOG.info("Sucessfully Loaded  Docter " + docter.getD_FName() + " " + docter.getD_LName() + "!");
 			}
+			LOG.info("Sucessfully Completed Load All Docters ! ");
 
 		} catch (Exception e) {
-			System.out.println("getAllDocters()");
-			e.printStackTrace();
+			LOG.warn("Exception in getAllDocters()  -> DocterService :", e);
+
 		}
 
 		return (docters);

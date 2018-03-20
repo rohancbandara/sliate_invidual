@@ -14,8 +14,10 @@ import com.rcb.service.DocterService;
 
 @WebServlet("/addDocter")
 public class DocterAddServlet extends HttpServlet {
+
 	protected void doGet(HttpServletRequest request, HttpServletResponse response)
 			throws ServletException, IOException {
+
 		Docter docter = new Docter();
 		Special special = new Special();
 		docter.setD_FName(request.getParameter("txtFname"));

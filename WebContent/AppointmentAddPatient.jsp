@@ -6,7 +6,7 @@
 <%@page import="com.rcb.dbconnection.DbConnection"%>
 <html>
 <head>
-	<title>Create Appointment</title>
+	<title>Add Patient Details</title>
 </head>
 <body>
 <%
@@ -23,6 +23,6 @@ if(session.getAttribute("username")==null){
 %>
 <h3>Welcome :${username }        <a href="login">logout</a></h3>
 
-<%=session.getAttribute("apId")%>
+<%=session.getAttribute("pid")%>
 </body>
 </html>
