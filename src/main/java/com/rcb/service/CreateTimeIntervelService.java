@@ -129,16 +129,16 @@ public class CreateTimeIntervelService {
 		return (tables);
 	}
 
-	public static void main(String args[]) {
-		CreateTimeIntervelService cc = new CreateTimeIntervelService();
-		ArrayList<Appinment> appoimentList = cc.getAllAppoinment("2018-03-24");
-
-		for (int i = 0; i < appoimentList.size(); i++) {
-
-			System.out.println(appoimentList.get(i).getIntavel());
-			System.out.println(appoimentList.get(i).getP_fname());
-		}
-
-	}
+	// public static void main(String args[]) {
+	// CreateTimeIntervelService cc = new CreateTimeIntervelService();
+	// ArrayList<Appinment> appoimentList = cc.getAllAppoinment("2018-03-24");
+	//
+	// for (int i = 0; i < appoimentList.size(); i++) {
+	//
+	// System.out.println(appoimentList.get(i).getIntavel());
+	// System.out.println(appoimentList.get(i).getP_fname());
+	// }
+	//
+	// }
 
 }
