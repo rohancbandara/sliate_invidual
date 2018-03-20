@@ -56,11 +56,12 @@ public class CreateTimeIntervelService {
 
 	}
 
-	public ArrayList<Appinment> getAllAppoinment() {
+	public ArrayList<Appinment> getAllAppoinment(String tblId) {
 		ArrayList<Appinment> appinments = new ArrayList<Appinment>();
 		DbConnection db = new DbConnection();
 		try {
-			String sql = "SELECT tbl_special.sp_name, tbl_docters.d_fname, tbl_docters.d_lname, tbl_tables.tbl_id, tbl_tables.`date`, tbl_tables.`from`, tbl_tables.`to`, tbl_appoinment.id, tbl_appoinment.dsp, tbl_appoinment.patient, tbl_tables.d_id, tbl_appoinment.intervels FROM tbl_tables Inner Join tbl_docters ON tbl_docters.d_id = tbl_tables.d_id Inner Join tbl_special ON tbl_special.sp_id = tbl_docters.d_special Inner Join tbl_appoinment ON tbl_appoinment.tbl_id = tbl_tables.tbl_id ";
+			String sql = "SELECT tbl_special.sp_name, tbl_docters.d_fname, tbl_docters.d_lname, tbl_tables.tbl_id, tbl_tables.`date`, tbl_tables.`from`, tbl_tables.`to`, tbl_appoinment.id, tbl_appoinment.dsp, tbl_appoinment.patient, tbl_tables.d_id, tbl_appoinment.intervels, tbl_patient.p_fname, tbl_patient.p_lname FROM tbl_tables Inner Join tbl_docters ON tbl_docters.d_id = tbl_tables.d_id Inner Join tbl_special ON tbl_special.sp_id = tbl_docters.d_special Inner Join tbl_appoinment ON tbl_appoinment.tbl_id = tbl_tables.tbl_id Inner Join tbl_patient ON tbl_appoinment.patient = tbl_patient.p_id  where tbl_appoinment.tbl_id ='"
+					+ tblId + "'";
 			ResultSet rs = db.getData(sql);
 			while (rs.next()) {
 
@@ -75,10 +76,11 @@ public class CreateTimeIntervelService {
 				appoinment.setTo(rs.getInt("tbl_tables.to") / 60);
 				appoinment.setId(rs.getInt("tbl_appoinment.id"));
 				appoinment.setDsp(rs.getString("tbl_appoinment.dsp"));
-
 				appoinment.setP_id(rs.getInt("tbl_appoinment.patient"));
 				appoinment.setD_id(rs.getInt("tbl_tables.d_id"));
 				appoinment.setIntavel(rs.getString("tbl_appoinment.intervels"));
+				appoinment.setP_fname(rs.getString("tbl_patient.p_fname"));
+				appoinment.setP_lname(rs.getString("tbl_patient.p_lname"));
 
 				appinments.add(appoinment);
 				LOG.info("Sucessfully Loaded  Appoinment " + appoinment.getD_id() + " ! ");
@@ -129,12 +131,12 @@ public class CreateTimeIntervelService {
 
 	public static void main(String args[]) {
 		CreateTimeIntervelService cc = new CreateTimeIntervelService();
-		ArrayList<Table> appoimentList = cc.getAllTable();
+		ArrayList<Appinment> appoimentList = cc.getAllAppoinment("2018-03-24");
 
 		for (int i = 0; i < appoimentList.size(); i++) {
 
-			System.out.println(appoimentList.get(i).getD_fname());
-			System.out.println(appoimentList.get(i).getD_id());
+			System.out.println(appoimentList.get(i).getIntavel());
+			System.out.println(appoimentList.get(i).getP_fname());
 		}
 
 	}

@@ -1,4 +1,5 @@
 <?xml version="1.0" encoding="ISO-8859-1" ?>
+<%@page import="com.rcb.model.Table"%>
 <%@page import="com.rcb.model.Appinment"%>
 <%@page import="java.util.ArrayList"%>
 <%@page import="com.rcb.service.CreateTimeIntervelService"%>
@@ -28,83 +29,55 @@ if(session.getAttribute("username")==null){
 %>
 <h3>Welcome :${username }        <a href="login">logout</a></h3>
 </br></br>
-<h4>Appoinment Details</h4>
+<h4>Appoinment Details TEst</h4>
 
-<%
-	DbConnection db=new DbConnection();
-	try{
-		String sql="SELECT tbl_docters.d_fname, tbl_docters.d_lname, tbl_special.sp_name, tbl_tables.date, tbl_tables.from, tbl_tables.to FROM tbl_docters Inner Join tbl_special ON tbl_special.sp_id = tbl_docters.d_special Inner Join tbl_tables ON tbl_docters.d_id = tbl_tables.d_id ";
-		ResultSet rs=db.getData(sql);
-		System.out.println("Sucess sql");
+
+		<%
 		
-		while(rs.next()){
-			String lname=rs.getString("tbl_docters.d_lname");
-			String fname=rs.getString("tbl_docters.d_fname");
-			String dFullName=fname+" "+lname;
-			String special=rs.getString("tbl_special.sp_name");
-			String date=rs.getString("tbl_tables.date");
-			int fromTime=rs.getInt("tbl_tables.from")/60;
-			int toTime=rs.getInt("tbl_tables.to")/60;
+		CreateTimeIntervelService cT=new CreateTimeIntervelService();
+		
+		ArrayList<Table> tableList = cT.getAllTable();
+
+		for (int i = 0; i < tableList.size(); i++) {
 			
-			%>
-			<p><b>Dr.<%=dFullName.toUpperCase()%></b> Special in :<%=special %></p>
-			<p>Comming on : <b><%=date %></b> From <b><%=fromTime %>:00 HH</b> To <b><%=toTime %>:00 HH</b></p>
-			<table border="0">
-				<tr>
+		%>
+	
+		
+		<p><b>Dr.<%=tableList.get(i).getD_fname().toUpperCase()%> <%=tableList.get(i).getD_lname().toUpperCase() %></b> Special in :<%=tableList.get(i).getSp_name() %></p>
+		<p>Comming on : <b><%=tableList.get(i).getDate()%></b> From <b><%=tableList.get(i).getFrom() %>:00 HH</b> To <b><%=tableList.get(i).getTo()%>:00 HH</b></p>
+		<table border="1">
+		
+			    <tr>
 					<th>Time</th>
 					<th>Patient</th>
 					<th>Description</th>
 				</tr>
-			<%
-			try{
-				//String sql2="SELECT tbl_appoinment.id,tbl_tables.tbl_id, tbl_appoinment.intervels, tbl_appoinment.patient, tbl_appoinment.dsp FROM tbl_appoinment Inner Join tbl_tables ON tbl_tables.tbl_id = tbl_appoinment.tbl_id where tbl_tables.date='"+date+"' ";
-				String sql2="SELECT tbl_appoinment.id, tbl_tables.tbl_id, tbl_appoinment.intervels, tbl_appoinment.patient, tbl_appoinment.dsp, tbl_tables.`date`, tbl_tables.`from`, tbl_tables.`to` FROM tbl_appoinment Inner Join tbl_tables ON tbl_tables.tbl_id = tbl_appoinment.tbl_id where tbl_tables.date='"+date+"' ";
-				//String sql2="SELECT tbl_appoinment.id, tbl_tables.tbl_id, tbl_appoinment.intervels, tbl_appoinment.patient, tbl_appoinment.dsp, tbl_tables.`date`, tbl_tables.`from`, tbl_tables.`to`, tbl_patient.p_fname, tbl_patient.p_lname FROM tbl_appoinment Inner Join tbl_tables ON tbl_tables.tbl_id = tbl_appoinment.tbl_id Inner Join tbl_patient ON tbl_patient.p_id = tbl_appoinment.patient where tbl_tables.date='"+date+"'  ";
 				
-				ResultSet rs2=db.getData(sql2);
-				while(rs2.next()){
-					int id=rs2.getInt("tbl_appoinment.id");
-					String tbl_id=rs2.getString("tbl_tables.tbl_id");
-					String interval=rs2.getString("tbl_appoinment.intervels");
-					int patient=rs2.getInt("tbl_appoinment.patient");
-					
-					String dsp=rs2.getString("tbl_appoinment.dsp");
-					String sql3="SELECT tbl_patient.p_fname, tbl_patient.p_lname, tbl_appoinment.patient, tbl_patient.p_id FROM tbl_patient Inner Join tbl_appoinment ON tbl_patient.p_id = tbl_appoinment.patient where tbl_patient.p_id='"+patient+"' ";
-					String pFname,pLname,fullName=null;
-					ResultSet rs3=db.getData(sql3);
-					while(rs3.next()){
-						
-						pFname=rs3.getString("tbl_patient.p_fname");
-						pLname=rs3.getString("tbl_patient.p_fname");
-						fullName=pFname+" "+pLname;
-						
-					}
-					%>
-					<tr>
-						<td><%=interval %></td>
-						<td><a href="/RCB_Medicle_Center/getPid?id=<%=id %>"><%=fullName %></a></td>
-						<td><%=dsp %></a></td>
-					</tr>
-					<%
-					
+				<%
+				ArrayList<Appinment> appoinmentList=cT.getAllAppoinment(tableList.get(i).getTbl_id());
+				for (int y = 0; y < appoinmentList.size(); y++) {
+				%>
+				
+				<tr>
+						<td><%=appoinmentList.get(y).getIntavel() %></td>
+						<td><a href="/RCB_Medicle_Center/getPid?id=<%=appoinmentList.get(y).getId() %>"><%=appoinmentList.get(y).getP_fname()%> <%=appoinmentList.get(y).getP_lname() %></a></td>
+						<td><%=appoinmentList.get(y).getDsp() %></a></td>
+				</tr>
+				
+				
+				<% 
 				}
-			}catch(Exception e){
-				System.out.println("Error in DocterAppoinmentList.jsp load appoinment table error");
-				e.printStackTrace();}
-			%>	
-			
-				
-			</table>
-			<hr />
-			
-			<%		
-			}
+				%>
 		
-	}catch(Exception e){
-		System.out.println("Error in DocterAppoinmentList.jsp");
-		e.printStackTrace();}
+		</table>	
+	
 
-%>
+		
+		<% }%>
+
+
+
+
 
 
 
