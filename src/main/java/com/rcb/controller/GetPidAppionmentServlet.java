@@ -22,12 +22,19 @@ public class GetPidAppionmentServlet extends HttpServlet {
 			throws ServletException, IOException {
 		Appinment appinment = new Appinment();
 		int pid = Integer.parseInt(request.getParameter("id"));
+		String d_fullname = request.getParameter("dFullname");
+		String date = request.getParameter("date");
+		int comeTime = Integer.parseInt(request.getParameter("time"));
+
 		appinment.setP_id(pid);
 
-		response.sendRedirect("AppointmentAddPatient.jsp");
+		response.sendRedirect("AppointmentDocter.jsp");
 		// set dId in Patient Update jsp pase using session
 		HttpSession session = request.getSession();
 		session.setAttribute("pid", pid);
+		session.setAttribute("dFName", d_fullname);
+		session.setAttribute("date", date);
+		session.setAttribute("comeTime", comeTime);
 
 	}
 

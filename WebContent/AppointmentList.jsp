@@ -60,7 +60,7 @@ if(session.getAttribute("username")==null){
 				
 				<tr>
 						<td><%=appoinmentList.get(y).getIntavel() %></td>
-						<td><a href="/RCB_Medicle_Center/getPid?id=<%=appoinmentList.get(y).getId() %>"><%=appoinmentList.get(y).getP_fname()%> <%=appoinmentList.get(y).getP_lname() %></a></td>
+						<td><a href="/RCB_Medicle_Center/getPid?id=<%=appoinmentList.get(y).getId() %>&dFullname=<%=tableList.get(i).getD_fname()%> <%=tableList.get(i).getD_lname()%>&date=<%=tableList.get(i).getDate()%>&time=<%=tableList.get(i).getFrom()%>"><%=appoinmentList.get(y).getP_fname()%> <%=appoinmentList.get(y).getP_lname() %></a></td>
 						<td><%=appoinmentList.get(y).getDsp() %></a></td>
 				</tr>
 				

@@ -23,6 +23,11 @@ if(session.getAttribute("username")==null){
 %>
 <h3>Welcome :${username }        <a href="login">logout</a></h3>
 
-<%=session.getAttribute("pid")%>
+
+<p><%=session.getAttribute("dFName")%></p>
+<p><%=session.getAttribute("date")%></p>
+<p><%=session.getAttribute("comeTime")%></p>
+<p><%=session.getAttribute("pid")%></p>
+
 </body>
 </html>
