@@ -19,6 +19,15 @@ public class Patient {
 	private String p_tel;
 	private String p_status;
 	private int id_delete;
+	private String p_cDate;
+
+	public String getP_cDate() {
+		return p_cDate;
+	}
+
+	public void setP_cDate(String p_cDate) {
+		this.p_cDate = p_cDate;
+	}
 
 	public int getP_id() {
 		return p_id;

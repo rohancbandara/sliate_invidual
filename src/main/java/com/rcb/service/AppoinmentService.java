@@ -10,8 +10,8 @@ import com.rcb.model.Appinment;
 import com.rcb.model.Table;
 import com.rcb.model.TimeIntervel;
 
-public class CreateTimeIntervelService {
-	private static final Logger LOG = Logger.getLogger(CreateTimeIntervelService.class);
+public class AppoinmentService {
+	private static final Logger LOG = Logger.getLogger(AppoinmentService.class);
 
 	public static boolean createTable(TimeIntervel tI) {
 		DbConnection db = new DbConnection();
@@ -127,6 +127,24 @@ public class CreateTimeIntervelService {
 		}
 
 		return (tables);
+	}
+
+	public boolean setPatient(Appinment appoinment) {
+		DbConnection db = new DbConnection();
+		try {
+			String sql = "UPDATE  tbl_appoinment set patient='" + appoinment.getP_id() + "' WHERE id='"
+					+ appoinment.getId() + "'";
+			db.putData(sql);
+
+			LOG.info("Sucessfully Added Patient to Appoinment !");
+			return true;
+		} catch (Exception e) {
+
+			LOG.warn("Exception in  setPatient(Appinment appoinment)  -> AppoinmentService :" + e);
+
+		}
+
+		return false;
 	}
 
 	// public static void main(String args[]) {

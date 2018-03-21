@@ -1,4 +1,6 @@
 <!DOCTYPE html>
+<%@page import="com.rcb.model.Patient"%>
+<%@page import="com.rcb.service.PatientService"%>
 <%@page import="com.rcb.model.Docter"%>
 <%@page import="java.util.ArrayList"%>
 <%@page import="com.rcb.service.DocterService"%>
@@ -24,10 +26,33 @@ if(session.getAttribute("username")==null){
 <h3>Welcome :${username }        <a href="login">logout</a></h3>
 
 
-<p><%=session.getAttribute("dFName")%></p>
-<p><%=session.getAttribute("date")%></p>
-<p><%=session.getAttribute("comeTime")%></p>
-<p><%=session.getAttribute("pid")%></p>
+<form action="appoinmentAdd" method="get">
+
+<p>Docter  Dr.<%=session.getAttribute("dFName")%></p>
+<p>Date <%=session.getAttribute("date")%></p>
+<p>Time <%=session.getAttribute("comeTime")%></p>
+<p><%=session.getAttribute("aId")%></p>
+
+
+
+
+
+	<label>Patient </label>
+	<select id="patient" name="patient">
+	<%
+		PatientService pS=new PatientService();
+		ArrayList<Patient> patientList=pS.allPatient();
+		for(int i=0;i<patientList.size();i++){
+			%><option value="<%=patientList.get(i).getP_id()%>"><%=patientList.get(i).getP_fname() %> <%=patientList.get(i).getP_lname() %></option><% 	
+		}
+	%>
+	
+	</select>
+	<br>
+<button type="submit" name="btnSubmit" id="btnSubmit" value="scheduled">scheduled</button>
+<button type="submit" name="btnSubmit" id="btnSubmit" value="Cancel">Cancel</button>
+
+</form>
 
 </body>
 </html>

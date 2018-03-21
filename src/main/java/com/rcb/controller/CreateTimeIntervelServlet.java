@@ -9,7 +9,7 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
 import com.rcb.model.TimeIntervel;
-import com.rcb.service.CreateTimeIntervelService;
+import com.rcb.service.AppoinmentService;
 
 @WebServlet("/createTimeIntervel")
 public class CreateTimeIntervelServlet extends HttpServlet {
@@ -17,7 +17,7 @@ public class CreateTimeIntervelServlet extends HttpServlet {
 
 	protected void doGet(HttpServletRequest request, HttpServletResponse response)
 			throws ServletException, IOException {
-		CreateTimeIntervelService createTimeIntervel = new CreateTimeIntervelService();
+		AppoinmentService createTimeIntervel = new AppoinmentService();
 		TimeIntervel tI = new TimeIntervel();
 
 		tI.setdId(Integer.parseInt(request.getParameter("id")));

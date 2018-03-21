@@ -1,8 +1,9 @@
 <?xml version="1.0" encoding="ISO-8859-1" ?>
+<%@page import="com.rcb.service.AppoinmentService"%>
 <%@page import="com.rcb.model.Table"%>
 <%@page import="com.rcb.model.Appinment"%>
 <%@page import="java.util.ArrayList"%>
-<%@page import="com.rcb.service.CreateTimeIntervelService"%>
+
 <%@page import="java.sql.ResultSet"%>
 <%@page import="javax.naming.spi.DirStateFactory.Result"%>
 <%@page import="com.rcb.dbconnection.DbConnection"%>
@@ -34,7 +35,7 @@ if(session.getAttribute("username")==null){
 
 		<%
 		
-		CreateTimeIntervelService cT=new CreateTimeIntervelService();
+		AppoinmentService cT=new AppoinmentService();
 		
 		ArrayList<Table> tableList = cT.getAllTable();
 
