@@ -52,7 +52,7 @@ public class TestImageServlet extends HttpServlet {
 		docter.setD_special(Integer.parseInt(request.getParameter("special")));
 		docter.setImg_path(filePath);
 
-		System.out.println(docter.getImg_path() + "xxxxxxxxxx");
+		// System.out.println(docter.getImg_path() + "xxxxxxxxxx");
 
 		String action = request.getParameter("btnSubmit");
 		if (action.equals("save")) {
