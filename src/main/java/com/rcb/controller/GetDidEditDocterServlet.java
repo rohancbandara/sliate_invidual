@@ -9,7 +9,7 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
-import com.rcb.model.Appinment;
+import com.rcb.model.Docter;
 
 /**
  * Servlet implementation class SetPID
@@ -20,13 +20,13 @@ public class GetDidEditDocterServlet extends HttpServlet {
 
 	protected void doGet(HttpServletRequest request, HttpServletResponse response)
 			throws ServletException, IOException {
-		Appinment ap = new Appinment();
-		int apId = Integer.parseInt(request.getParameter("id"));
-		ap.setId(apId);
-		response.sendRedirect("AppointmentAddPatient.jsp");
-		// set apId in Appoinment
+		Docter docter = new Docter();
+		int dId = Integer.parseInt(request.getParameter("id"));
+		docter.setD_id(dId);
+		response.sendRedirect("DocterUpdate.jsp");
+		// set dId in Docter Details
 		HttpSession session = request.getSession();
-		session.setAttribute("apId", apId);
+		session.setAttribute("dID", docter.getD_id());
 
 	}
 

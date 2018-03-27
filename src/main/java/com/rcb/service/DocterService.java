@@ -18,9 +18,10 @@ public class DocterService {
 		Special special = new Special();
 		try {
 			String insertDocterSQL = "INSERT INTO tbl_docters(tbl_docters.d_fname,\r\n" + "tbl_docters.d_lname,\r\n"
-					+ "tbl_docters.d_dob,\r\n" + "tbl_docters.d_email,\r\n" + "tbl_docters.d_special)VALUES(" + "'"
-					+ docter.getD_FName() + "'," + "'" + docter.getD_LName() + "'," + "'" + docter.getD_dob() + "',"
-					+ "'" + docter.getD_email() + "'," + "'" + docter.getD_special() + "') ";
+					+ "tbl_docters.d_dob,\r\n" + "tbl_docters.d_email,\r\n" + "tbl_docters.d_special,\r\n "
+					+ "tbl_docters.img_path)VALUES(" + "'" + docter.getD_FName() + "'," + "'" + docter.getD_LName()
+					+ "'," + "'" + docter.getD_dob() + "'," + "'" + docter.getD_email() + "'," + "'"
+					+ docter.getD_special() + "','" + docter.getImg_path() + "') ";
 
 			db.putData(insertDocterSQL);
 
@@ -87,6 +88,7 @@ public class DocterService {
 				docters.add(docter);
 				LOG.info("Sucessfully Loaded  Docter " + docter.getD_FName() + " " + docter.getD_LName() + "!");
 			}
+			rs.close();
 			LOG.info("Sucessfully Completed Load All Docters ! ");
 
 		} catch (Exception e) {

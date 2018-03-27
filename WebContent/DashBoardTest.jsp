@@ -66,7 +66,7 @@ if(session.getAttribute("username")==null){
               <a href="Dashboard.html">Navbar</a>
             </li>
             <li>
-              <a href="cards.html">Cards</a>
+              <a href="DashBoard.jsp">Cards</a>
             </li>
           </ul>
         </li>

@@ -13,7 +13,20 @@
 
 %>
 <h3>Welcome :${username }        <a href="login">logout</a></h3>
-<%=session.getAttribute("did")%>
+<%=session.getAttribute("dID")%>
+
+<h3>Basic Info</h3>
+		 <label >Email </label>
+            <input name="txtEmail" type="text" id="txtEmail"  placeholder="Email" /><br>
+		 <label >First Name </label>
+            <input name="txtFname" type="text" id="txtFname"  placeholder="First Name" /><br>
+         <label >Last Name </label>
+            <input name="txtLname" type="text" id="txtLname"  placeholder="Last Name" /><br>
+         <label >Special </label>
+            <select name="special" id="special" >
+				<option value="">sss</option>
+			</select><br>
+
 
 </body>
 </html>

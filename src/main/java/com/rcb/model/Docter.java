@@ -11,6 +11,15 @@ public class Docter {
 	private String create_date;
 	private String edit_date;
 	private int is_delete;
+	private String img_path;
+
+	public String getImg_path() {
+		return img_path;
+	}
+
+	public void setImg_path(String img_path) {
+		this.img_path = img_path;
+	}
 
 	public String getEdit_date() {
 		return edit_date;
