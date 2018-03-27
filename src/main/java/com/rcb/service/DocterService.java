@@ -70,7 +70,7 @@ public class DocterService {
 		ArrayList<Docter> docters = new ArrayList<Docter>();
 
 		try {
-			String sql = "SELECT tbl_docters.d_id, tbl_docters.d_fname, tbl_docters.d_lname, tbl_docters.d_dob, tbl_docters.d_email, tbl_docters.d_special, tbl_docters.create_date,tbl_docters.edit_date, tbl_special.sp_name FROM tbl_docters Inner Join tbl_special ON tbl_special.sp_id = tbl_docters.d_special ";
+			String sql = "SELECT tbl_docters.d_id,tbl_docters.img_path, tbl_docters.d_fname, tbl_docters.d_lname, tbl_docters.d_dob, tbl_docters.d_email, tbl_docters.d_special, tbl_docters.create_date,tbl_docters.edit_date, tbl_special.sp_name FROM tbl_docters Inner Join tbl_special ON tbl_special.sp_id = tbl_docters.d_special ";
 
 			ResultSet rs = db.getData(sql);
 			while (rs.next()) {
@@ -85,8 +85,10 @@ public class DocterService {
 				docter.setCreate_date(rs.getString("tbl_docters.create_date"));
 				docter.setEdit_date(rs.getString("tbl_docters.edit_date"));
 				docter.setD_specileName(rs.getString("tbl_special.sp_name"));
+				docter.setImg_path(rs.getString("tbl_docters.img_path"));
 				docters.add(docter);
-				LOG.info("Sucessfully Loaded  Docter " + docter.getD_FName() + " " + docter.getD_LName() + "!");
+				LOG.info("Sucessfully Loaded  Docter " + docter.getD_FName() + " " + docter.getD_LName() + "!" + " "
+						+ docter.getImg_path());
 			}
 			rs.close();
 			LOG.info("Sucessfully Completed Load All Docters ! ");

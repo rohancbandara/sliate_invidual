@@ -24,9 +24,9 @@ if(session.getAttribute("username")==null){
 }
 
 %>
- <form action="test" method="post" enctype="multipart/form-data">
+ <form action="addDocter" method="post" enctype="multipart/form-data">
     
-           
+        <h3>Welcome :${username }        <a href="login">logout</a></h3><br>
             <h3>Basic Info</h3>
 		 <label >Upload Image </label> <br>
 		   <img id="blah" src="#" alt="your image" /> 
@@ -64,7 +64,7 @@ if(session.getAttribute("username")==null){
 			</select><br>
          
          <button type="submit" name="btnSubmit" id="btnSubmit" value="save">Register</button>   
-               
+          <button type="submit" name="btnSubmit" id="btnSubmit" value="list">Show Docters</button>     
                
                
           

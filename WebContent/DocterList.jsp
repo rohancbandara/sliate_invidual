@@ -28,7 +28,7 @@
 		
 		<!-- Docter Lists... -->
 		<table border="1">
-				<th scope="col">DID</th><th scope="col">Docter Name</th><th scope="col">Date of Birth</th><th scope="col">Email</th><th scope="col">Special</th><th scope="col">Created Date</th><th scope="col">Edited Date</th><th colspan="2" scope="col">Action</th>
+				<th scope="col">DID</th><th scope="col">Picture</th><th scope="col">Docter Name</th><th scope="col">Date of Birth</th><th scope="col">Email</th><th scope="col">Special</th><th scope="col">Created Date</th><th scope="col">Edited Date</th><th colspan="2" scope="col">Action</th>
 				
 		<%
 		
@@ -42,6 +42,8 @@
 		<tr>
 		
 		<td><%=doctersList.get(i).getD_id()%></td>
+		
+		<td><img src="<%=doctersList.get(i).getImg_path()%>" width="250px" height="220px"></td>
 		<td><%=doctersList.get(i).getD_FName() %> <%=doctersList.get(i).getD_LName() %></td>
 		
 		<td><%=doctersList.get(i).getD_dob() %></td>
